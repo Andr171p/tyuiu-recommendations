@@ -1,4 +1,4 @@
-from typing import List, Literal
+from typing import List, Literal, Dict
 
 from pydantic import BaseModel
 
@@ -13,3 +13,7 @@ class Applicant(BaseModel):
     points: int
     bonus_points: int
     exams: List[Exam]
+
+    @property
+    def exams_dict(self) -> Dict[str, int]:
+        return {exam.subject: exam.points for exam in self.exams}

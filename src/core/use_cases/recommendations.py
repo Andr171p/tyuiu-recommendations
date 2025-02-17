@@ -1,4 +1,5 @@
 from src.core.entities import Applicant, Recommendation
+from src.dto import ApplicantDTO
 from src.services.database import BaseRetriever
 from src.services.preprocessing import BasePipeline
 
@@ -13,4 +14,9 @@ class RecommendationsUseCase:
         self._retriever = retriever
 
     def recommend(self, applicant: Applicant) -> Recommendation:
-        pass
+        dataframe = ApplicantDTO.from_applicant(applicant)
+        vector = self._pipeline.preprocess(dataframe)
+        similar = self._retriever.find_similar(vector)
+        return Recommendation(
+            directions=[]
+        )
