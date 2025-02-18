@@ -1,8 +1,10 @@
 from numpy import ndarray
 from chromadb import ClientAPI
 
+from src.services.vector_store.base_retriever import BaseRetrieverService
 
-class ChromaRetriever:
+
+class ChromaRetrieverService(BaseRetrieverService):
     def __init__(
             self,
             client_api: ClientAPI,

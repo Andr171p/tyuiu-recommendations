@@ -1,22 +1,22 @@
-from src.core.entities import Applicant, Recommendation
 from src.dto import ApplicantDTO
-from src.services.database import BaseRetriever
-from src.services.preprocessing import BasePipeline
+from src.core.entities import Recommendation
+from src.services.vector_store import BaseRetrieverService
+from src.services.preprocessing import BasePreprocessingService
 
 
 class RecommendationsUseCase:
     def __init__(
             self,
-            pipeline: BasePipeline,
-            retriever: BaseRetriever
+            preprocessing_service: BasePreprocessingService,
+            retriever_service: BaseRetrieverService
     ) -> None:
-        self._pipeline = pipeline
-        self._retriever = retriever
+        self._preprocessing_service = preprocessing_service
+        self._retriever_service = retriever_service
 
-    def recommend(self, applicant: Applicant) -> Recommendation:
-        dataframe = ApplicantDTO.from_applicant(applicant)
-        vector = self._pipeline.preprocess(dataframe)
-        similar = self._retriever.find_similar(vector)
+    def recommend(self, applicant_dto: ApplicantDTO) -> Recommendation:
+        dataframe = applicant_dto.to_dataframe()
+        vector = self._preprocessing_service.preprocess(dataframe)
+        similar = self._retriever_service.find_similar(vector)
         return Recommendation(
             directions=[]
         )
