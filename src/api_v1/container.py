@@ -6,6 +6,7 @@ from src.core.use_cases import RecommendationsUseCase
 from src.services.vector_store import ChromaRetrieverService
 from src.services.preprocessing import SklearnPreprocessingService
 from src.services.preprocessing.transformers import (
+    ZeroImputer,
     GenderBinarizer,
     MilitaryServiceBinarizer,
     ForeignCitizenshipEncoder,
@@ -15,6 +16,7 @@ from src.config import settings
 
 
 class Container(containers.DeclarativeContainer):
+    zero_imputer = ZeroImputer()
     gender_binarizer = providers.Singleton(
         GenderBinarizer,
         path=settings.transformers.gender_binarizer_path
@@ -33,9 +35,10 @@ class Container(containers.DeclarativeContainer):
     )
     preprocessing_service = providers.Singleton(
         SklearnPreprocessingService,
+        zero_imputer=ZeroImputer(),
         gender_binarizer=gender_binarizer,
         military_service_binarizer=military_service_binarizer,
-        foreign_citizendhip_encoder=foreign_citizenship_encoder,
+        foreign_citizenship_encoder=foreign_citizenship_encoder,
         applicants_scaler=applicants_scaler
     )
     client_api = providers.Singleton(
