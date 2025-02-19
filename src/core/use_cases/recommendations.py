@@ -16,7 +16,7 @@ class RecommendationsUseCase:
     def recommend(self, applicant_dto: ApplicantDTO) -> Recommendations:
         dataframe = applicant_dto.to_dataframe()
         vector = self._preprocessing_service.preprocess(dataframe)
-        directions_dto = self._retriever_service.find_similar_directions(vector)
+        directions_dto = self._retriever_service.find_similar_directions(vector[0])
         return Recommendations(
             directions=[
                 Direction(**direction_dto.model_dump())

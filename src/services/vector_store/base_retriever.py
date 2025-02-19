@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List
+from typing import Sequence
 from numpy import ndarray
 
 from src.dto import DirectionDTO
@@ -11,5 +11,5 @@ class BaseRetrieverService(ABC):
             self,
             vector: ndarray[float],
             top_n: int = 10
-    ) -> List[DirectionDTO]:
+    ) -> Sequence[DirectionDTO]:
         raise NotImplemented

@@ -13,7 +13,7 @@ CHROMA_PATH: Path = BASE_DIR / "chroma"
 
 DATAFRAME_PATH: Path = BASE_DIR / "scripts" / "Processed_Applicants.csv"
 
-SCALER_PATH: Path = BASE_DIR / "estimators" / "applicants_scaler.joblib"
+SCALER_PATH: Path = BASE_DIR / "fitted_transformers" / "applicants_scaler.joblib"
 
 
 chroma_client = chromadb.PersistentClient(path=str(CHROMA_PATH))
