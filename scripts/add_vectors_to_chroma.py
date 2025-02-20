@@ -1,6 +1,4 @@
 import uuid
-from importlib.metadata import metadata
-
 import joblib
 import chromadb
 import pandas as pd
