@@ -1,1 +1,1 @@
-from scripts import add_vectors_to_chroma
+from scripts import search_similar_chroma

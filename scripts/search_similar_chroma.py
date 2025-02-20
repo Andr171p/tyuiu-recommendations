@@ -27,18 +27,6 @@ scaler = joblib.load(SCALER_PATH)
 
 scaled_applicants = scaler.transform(applicants)
 
-'''for vector, direction in zip(scaled_applicants, directions):
-    collection.add(
-        ids=[str(uuid.uuid4())],
-        embeddings=[vector.tolist()],
-        metadatas={
-            "name": direction,
-            "description": "",
-            "link": ""
-        }
-    )
-'''
-
 results = collection.query(
     query_embeddings=scaled_applicants[1000]
 )
