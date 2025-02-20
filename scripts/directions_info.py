@@ -27,7 +27,7 @@ scaled_applicants = scaler.transform(applicants_df)
 
 
 chroma_client = chromadb.PersistentClient(path=str(CHROMA_PATH))
-chroma_client.delete_collection("applicants")
+# chroma_client.delete_collection("applicants")
 collection = chroma_client.get_or_create_collection("applicants")
 
 
