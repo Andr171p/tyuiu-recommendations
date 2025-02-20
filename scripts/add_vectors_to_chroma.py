@@ -15,7 +15,7 @@ SCALER_PATH: Path = BASE_DIR / "fitted_transformers" / "applicants_scaler.joblib
 
 
 chroma_client = chromadb.PersistentClient(path=str(CHROMA_PATH))
-collection = chroma_client.get_or_create_collection("applicants")
+collection = chroma_client.get_collection("applicants")
 
 df = pd.read_csv(DATAFRAME_PATH)
 df.drop("Unnamed: 0",axis=1, inplace=True)
@@ -44,9 +44,4 @@ results = collection.query(
 )
 metadatas = results["metadatas"]
 print(len(metadatas[0]))
-unique_names = set()
-for metadata in metadatas[0]:
-    unique_names.add(metadata["name"])
-
-print(unique_names)
-print(len(unique_names))
+print(metadatas)
