@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Set
 
 from numpy import ndarray
 from chromadb import ClientAPI
@@ -19,13 +19,13 @@ class ChromaRetrieverService(BaseRetrieverService):
             self,
             vector: ndarray[float],
             top_n: int = 10
-    ) -> List[DirectionDTO]:
+    ) -> Set[DirectionDTO]:
         results = self._collection.query(
             query_embeddings=[vector.tolist()],
             n_results=top_n
         )
         metadatas = results.get("metadatas")
-        return [
+        return {
             DirectionDTO.from_metadata(metadata)
             for metadata in metadatas[0]
-        ]
+        }
