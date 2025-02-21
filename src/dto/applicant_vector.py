@@ -4,7 +4,7 @@ from pandas import DataFrame
 from pydantic import BaseModel
 
 
-class ApplicantDTO(BaseModel):
+class ApplicantVector(BaseModel):
     gender: Literal["male", "female"]
     foreign_citizenship: str
     military_service: Literal["yes", "no"]

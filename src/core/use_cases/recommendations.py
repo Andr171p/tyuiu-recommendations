@@ -1,5 +1,6 @@
-from src.dto import ApplicantDTO
-from src.core.entities import Recommendations, Direction
+from src.dto import ApplicantVector
+from src.mappers import ApplicantMapper
+from src.core.entities import Recommendations, Direction, Applicant
 from src.services.vector_store import BaseRetrieverService
 from src.services.preprocessing import BasePreprocessingService
 
@@ -13,10 +14,10 @@ class RecommendationsUseCase:
         self._preprocessing_service = preprocessing_service
         self._retriever_service = retriever_service
 
-    def recommend(self, applicant_dto: ApplicantDTO) -> Recommendations:
-        dataframe = applicant_dto.to_dataframe()
+    def recommend(self, applicant: Applicant) -> Recommendations:
+        applicant_vector = ApplicantMapper.to_applicant_vector(applicant)
+        dataframe = applicant_vector.to_dataframe()
         vector = self._preprocessing_service.preprocess(dataframe)
-        print(vector)
         directions_dto = self._retriever_service.find_similar_directions(vector[0])
         return Recommendations(
             directions=[
