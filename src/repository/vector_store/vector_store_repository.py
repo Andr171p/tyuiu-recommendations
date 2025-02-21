@@ -10,7 +10,7 @@ class VectorStoreRepository:
     def __init__(self, retriever: BaseRetriever):
         self._retriever = retriever
         
-    def find_similar_directions(
+    def find_similar(
         self, 
         vector: np.ndarray[float],
         top_n: int = 10,
