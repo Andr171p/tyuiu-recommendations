@@ -6,7 +6,7 @@ from src.services.database.models import BaseModel
 
 class BaseCRUD(ABC):
     @abstractmethod
-    async def crate(self, model: BaseModel) -> int:
+    async def create(self, model: BaseModel) -> int:
         raise NotImplemented
 
     @abstractmethod

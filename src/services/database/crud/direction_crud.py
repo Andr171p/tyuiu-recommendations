@@ -2,24 +2,20 @@ from typing import List
 
 from sqlalchemy import insert, select
 
-from src.services.database.crud.base_crud import BaseCrud
+from src.services.database.crud.base_crud import BaseCRUD
 from src.services.database.models import DirectionModel
 from src.services.database.database_manager import DatabaseManager
 
 
-class DirectionCRUD(BaseCrud):
+class DirectionCRUD(BaseCRUD):
     def __init__(self, manager: DatabaseManager) -> None:
         self._manager = manager
         
     async def create(self, direction: DirectionModel) -> int:
         async with self._manager.session() as session:
-            stmt = (
-                insert(DirectionModel)
-                .values(**direction.__dict__)
-                .returning(direction.id)
-            )
-            id = await session.execute(stmt)
-        return id
+            session.add(direction)
+            await session.commit()
+        return direction.id
     
     async def read_by_id(self, id: int) -> DirectionModel | None:
         async with self._manager.session() as session:

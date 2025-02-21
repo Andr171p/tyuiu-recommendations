@@ -5,7 +5,7 @@ from src.interations import RecommendationsInteration
 from src.core.use_cases import RecommendationsUseCase
 from src.services.vector_store import ChromaRetrieverService
 from src.services.preprocessing import SklearnPreprocessingService
-from src.services.preprocessing.transformers import (
+from src.services.preprocessing.sklearn_transformers import (
     ZeroImputer,
     GenderBinarizer,
     MilitaryServiceBinarizer,
