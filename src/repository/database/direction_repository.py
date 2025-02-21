@@ -1,12 +1,12 @@
 from typing import List
 
-from src.repository.database.database_repository import SQLDatabaseRepository
+from src.repository.database.database_repository import DatabaseRepository
 from src.services.database.crud import DirectionCRUD
 from src.services.database.models import DirectionModel
 from src.core.entities import Direction
 
 
-class DirectionRepository(SQLDatabaseRepository):
+class DirectionRepository(DatabaseRepository):
     def __init__(self, crud: DirectionCRUD) -> None:
         self._crud = crud
         
@@ -24,3 +24,4 @@ class DirectionRepository(SQLDatabaseRepository):
     async def add(self, direction: Direction) -> int | None:
         id = await self._crud.create(DirectionModel(**direction.model_dump()))
         return id
+    

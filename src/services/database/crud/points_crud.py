@@ -37,7 +37,7 @@ class PointsCRUD(BaseCRUD):
                 .where(PointsModel.direction_id == direction_id)
             )
             points = await session.execute(stmt)
-        return points.scalars_one_or_none()
+        return points.scalars().all()
     
     async def read_all(self) -> List[PointsModel]:
         async with self._manager.session() as session:
