@@ -28,6 +28,6 @@ class DirectionRelationMixin:
     @declared_attr
     def direction(cls) -> Mapped["DirectionModel"]:
         return relationship(
-            argumnet="DirectionModel",
+            argument="DirectionModel",
             back_populates=cls._direction_back_populates,
         )
