@@ -15,9 +15,18 @@ class TransformersSettings(BaseSettings):
 class ChromaSettings(BaseSettings):
     path: Path = BASE_DIR / "chroma"
 
+
+class SQLiteSettings(BaseSettings):
+    name: str = "db.sqlite3"
+    path: Path = BASE_DIR / name
+    driver: str = "aiosqlite"
+    url: str = f"sqlite+{driver}:///{path}"
+
+
 class Settings(BaseSettings):
     transformers: TransformersSettings = TransformersSettings()
     chroma: ChromaSettings = ChromaSettings()
+    sqlite: SQLiteSettings = SQLiteSettings()
 
 
 settings = Settings()
