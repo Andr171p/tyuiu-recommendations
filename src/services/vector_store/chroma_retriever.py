@@ -1,10 +1,10 @@
 from numpy import ndarray
 from chromadb import ClientAPI
 
-from src.services.vector_store.base_retriever import BaseRetrieverService
+from src.services.vector_store.base_retriever import BaseRetriever
 
 
-class ChromaRetrieverService(BaseRetrieverService):
+class ChromaRetriever(BaseRetriever):
     def __init__(
             self,
             client_api: ClientAPI,
@@ -12,7 +12,7 @@ class ChromaRetrieverService(BaseRetrieverService):
     ) -> None:
         self._collection = client_api.get_collection(collection_name)
 
-    def find_similar(
+    def retrieve(
             self,
             vector: ndarray[float],
             top_n: int = 10

@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Mapped, mapped_column
 
-from src.services.database.models.base_model import BaseModel
-from src.services.database.models.direction_relation_mixin import DirectionRelationMixin
+from src.services.sql_database.models.base_model import BaseModel
+from src.services.sql_database.models.direction_relation_mixin import DirectionRelationMixin
 
 
 class PointsModel(DirectionRelationMixin, BaseModel):

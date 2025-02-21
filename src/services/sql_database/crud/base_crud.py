@@ -1,7 +1,7 @@
 from typing import List
 from abc import ABC, abstractmethod
 
-from src.services.database.models import BaseModel
+from src.services.sql_database.models import BaseModel
 
 
 class BaseCRUD(ABC):
