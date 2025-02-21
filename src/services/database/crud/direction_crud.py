@@ -2,9 +2,9 @@ from typing import List
 
 from sqlalchemy import insert, select
 
-from src.services.sql_database.crud.base_crud import BaseCRUD
-from src.services.sql_database.models import DirectionModel
-from src.services.sql_database.database_manager import DatabaseManager
+from src.services.database.crud.base_crud import BaseCRUD
+from src.services.database.models import DirectionModel
+from src.services.database.database_manager import DatabaseManager
 
 
 class DirectionCRUD(BaseCRUD):

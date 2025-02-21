@@ -1,12 +1,12 @@
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from src.services.sql_database.models.points_model import PointsModel
+    from src.services.database.models.points_model import PointsModel
 
 from sqlalchemy import Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from src.services.sql_database.models.base_model import BaseModel
+from src.services.database.models.base_model import BaseModel
 
 
 class DirectionModel(BaseModel):

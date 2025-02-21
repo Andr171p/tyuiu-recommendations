@@ -1,8 +1,8 @@
 import asyncio
 
-from src.services.sql_database.database_manager import DatabaseManager
-from src.services.sql_database.crud import DirectionCRUD
-from src.repository.sql_database.direction_repository import DirectionRepository
+from src.services.database.database_manager import DatabaseManager
+from src.services.database.crud import DirectionCRUD
+from src.repository.database.direction_repository import DirectionRepository
 from src.config import settings
 
 

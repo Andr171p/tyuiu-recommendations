@@ -1,13 +1,13 @@
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from src.services.sql_database.crud import BaseCRUD
+    from src.services.database.crud import BaseCRUD
 
 from abc import ABC, abstractmethod
 from pydantic import BaseModel
 
 
-class SQLDatabaseRepository(ABC):
+class DatabaseRepository(ABC):
     _crud: "BaseCRUD"
     
     @abstractmethod

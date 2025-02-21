@@ -1,7 +1,7 @@
 from typing import TYPE_CHECKING, Optional
 
 if TYPE_CHECKING:
-    from src.services.sql_database.models.direction_model import DirectionModel
+    from src.services.database.models.direction_model import DirectionModel
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import (
