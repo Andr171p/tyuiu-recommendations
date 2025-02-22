@@ -1,8 +1,14 @@
+import os
 from pathlib import Path
+from dotenv import load_dotenv
 from pydantic_settings import BaseSettings
 
 
 BASE_DIR: Path = Path(__file__).resolve().parent.parent
+
+ENV_FILE_PATH: Path = BASE_DIR / ".env"
+
+load_dotenv(dotenv_path=ENV_FILE_PATH)
 
 
 class TransformersSettings(BaseSettings):
@@ -32,6 +38,10 @@ class ChromaSettings(BaseSettings):
     path: Path = BASE_DIR / "chroma"
 
 
+class PineconeSettings(BaseSettings):
+    api_key: str = os.getenv("PINECONE_API_KEY")
+
+
 class SQLiteSettings(BaseSettings):
     name: str = "db.sqlite3"
     path: Path = BASE_DIR / name
@@ -42,6 +52,7 @@ class SQLiteSettings(BaseSettings):
 class Settings(BaseSettings):
     transformers: TransformersSettings = TransformersSettings()
     chroma: ChromaSettings = ChromaSettings()
+    pinecone: PineconeSettings = PineconeSettings()
     sqlite: SQLiteSettings = SQLiteSettings()
 
 

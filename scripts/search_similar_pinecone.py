@@ -25,13 +25,13 @@ directions = df["direction"]
 scaler = joblib.load(SCALER_PATH)
 scaled_applicants = scaler.transform(applicants)
 
-query_vector = scaled_applicants[100].tolist()
+query_vector = scaled_applicants[10].tolist()
 results = index.query(
     vector=query_vector,
     top_k=10,
     include_metadata=True
 )
-
+print(results)
 metadatas = [match["metadata"] for match in results["matches"]]
 print(f"Results found: {len(metadatas)}")
 print(metadatas)

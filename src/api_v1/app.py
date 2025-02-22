@@ -8,18 +8,9 @@ from src.api_v1.routers import (
     directions_router
 )
 from src.api_v1.container import Container
-from src.api_v1.lifespan import lifespan
 
 
 logging.basicConfig(level=logging.INFO)
-
-print("Start add vector to chroma")
-from scripts import add_vectors_chroma
-print("Vectors added to chroma successfully")
-print("Start add directions to sqlite")
-from scripts import create_db
-from scripts import add_directions_sqlite
-print("Direction added to sqlite successfully")
 
 container = Container()
 

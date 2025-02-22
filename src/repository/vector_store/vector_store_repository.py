@@ -1,23 +1,20 @@
-from typing import Set
+from typing import TYPE_CHECKING, Set
 
+if TYPE_CHECKING:
+    from src.vector_store import BaseRetriever
+    from src.dto import DirectionMetadata
+
+from abc import ABC, abstractmethod
 import numpy as np
 
-from src.vector_store import BaseRetriever
-from src.dto import DirectionMetadata
 
+class VectorStoreRepository(ABC):
+    _retriever: "BaseRetriever"
 
-class VectorStoreRepository:
-    def __init__(self, retriever: BaseRetriever):
-        self._retriever = retriever
-        
+    @abstractmethod
     def find_similar(
         self, 
         vector: np.ndarray[float],
         top_n: int = 10,
-    ) -> Set[DirectionMetadata]:
-        results = self._retriever.retrieve(vector, top_n)
-        metadatas = results.get("metadatas")
-        return {
-            DirectionMetadata.from_metadata(metadata)
-            for metadata in metadatas[0]
-        }
+    ) -> Set["DirectionMetadata"]:
+        raise NotImplementedError

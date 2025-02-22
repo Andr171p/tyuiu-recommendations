@@ -1,4 +1,4 @@
-import chromadb
+from pinecone import Pinecone
 from dependency_injector import containers, providers
 
 from src.config import settings
@@ -7,7 +7,7 @@ from src.core.use_cases import (
     DirectionUseCase,
     PointsUseCase
 )
-from src.vector_store.chroma import ChromaRetriever
+from src.vector_store.pinecone import PineconeRetriever
 from src.database.crud import DirectionCRUD, PointsCRUD
 from src.database.database_manager import DatabaseManager
 from src.preprocessing import SklearnPipeline
@@ -49,18 +49,18 @@ class Container(containers.DeclarativeContainer):
         foreign_citizenship_encoder=foreign_citizenship_encoder,
         applicants_scaler=applicants_scaler
     )
-    client_api = providers.Singleton(
-        chromadb.PersistentClient,
-        path=str(settings.chroma.path)
+    pinecone = providers.Factory(
+        Pinecone,
+        api_key=settings.pinecone.api_key
     )
-    chroma_retriever = providers.Singleton(
-        ChromaRetriever,
-        client_api=client_api,
-        collection_name="applicants"
+    pinecone_retriever = providers.Singleton(
+        PineconeRetriever,
+        pinecone=pinecone,
+        index_name="applicants"
     )
     vector_store_repository = providers.Singleton(
         VectorStoreRepository,
-        retriever=chroma_retriever
+        retriever=pinecone_retriever
     )
     database_manager = providers.Singleton(
         DatabaseManager,

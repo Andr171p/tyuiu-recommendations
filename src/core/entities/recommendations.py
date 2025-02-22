@@ -1,4 +1,4 @@
-from typing import List
+from typing import Sequence, List
 
 from pydantic import BaseModel
 
@@ -10,7 +10,7 @@ class Recommendations(BaseModel):
     @classmethod
     def from_directions_metadata(
         cls, 
-        directions_metadata: List[DirectionMetadata]
+        directions_metadata: Sequence[DirectionMetadata]
     ) -> "Recommendations":
         return cls(
             directions=[

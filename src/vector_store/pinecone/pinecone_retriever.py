@@ -18,7 +18,7 @@ class PineconeRetriever(BaseRetriever):
             top_n: int = 10
     ) -> dict:
         results = self._index.query(
-            vector=[vector[0].tolist()],
+            vector=vector[0].tolist(),
             top_k=top_n,
             include_values=True
         )
