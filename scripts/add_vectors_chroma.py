@@ -9,12 +9,12 @@ BASE_DIR: Path = Path(__file__).resolve().parent.parent
 
 CHROMA_PATH: Path = BASE_DIR / "chroma"
 
-APPLICANTS_DIRECTIONS_DF_PATH: Path = BASE_DIR / "notebboks" / "Applicants_With_Direction.csv"
+APPLICANTS_DIRECTIONS_DF_PATH: Path = BASE_DIR / "notebooks" / "Applicants_With_Direction.csv"
 
 SCALER_PATH: Path = BASE_DIR / "fitted_transformers" / "applicants_scaler.joblib"
 
 
-applicants_directions_df = pd.read_csv(r"C:\Users\andre\IdeaProjects\TyuiuDirectionsRecSys\notebooks\Applicants_With_Direction.csv")
+applicants_directions_df = pd.read_csv(APPLICANTS_DIRECTIONS_DF_PATH)
 directions_df = applicants_directions_df[["direction_name", "direction_id"]]
 applicants_df = applicants_directions_df.drop(
     ["Unnamed: 0", "direction_name", "direction_id", "description"], 
