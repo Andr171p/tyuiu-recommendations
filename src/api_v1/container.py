@@ -64,7 +64,7 @@ class Container(containers.DeclarativeContainer):
     )
     database_manager = providers.Singleton(
         DatabaseManager,
-        url=settings.sqlite.url,
+        url=settings.postgres.url,
     )
     directions_crud = providers.Singleton(
         DirectionCRUD,

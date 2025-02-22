@@ -49,14 +49,23 @@ class SQLiteSettings(BaseSettings):
     url: str = f"sqlite+{driver}:///{path}"
 
 
+class PostgresSettings(BaseSettings):
+    user: str = os.getenv("POSTGRES_USER")
+    password: str = os.getenv("POSTGRES_PASSWORD")
+    host: str = os.getenv("POSTGRES_HOST")
+    port: str = os.getenv("POSTGRES_PORT")
+    database: str = os.getenv("POSTGRES_DB")
+
+    driver: str = "asyncpg"
+    url: str = f"postgresql+{driver}://{user}:{password}@{host}:{port}/{database}"
+
+
 class Settings(BaseSettings):
     transformers: TransformersSettings = TransformersSettings()
     chroma: ChromaSettings = ChromaSettings()
     pinecone: PineconeSettings = PineconeSettings()
     sqlite: SQLiteSettings = SQLiteSettings()
+    postgres: PostgresSettings = PostgresSettings()
 
 
 settings = Settings()
-
-
-print(settings.sqlite.url)

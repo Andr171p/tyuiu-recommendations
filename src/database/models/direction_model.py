@@ -12,7 +12,7 @@ from src.database.models.base_model import BaseModel
 class DirectionModel(BaseModel):
     __tablename__ = 'directions'
 
-    direction_id: Mapped[int] = mapped_column(nullable=False)
+    direction_id: Mapped[int] = mapped_column(nullable=False, unique=True)
     name: Mapped[str] = mapped_column(nullable=False)
     description: Mapped[str] = mapped_column(Text, nullable=True)
 

@@ -17,7 +17,7 @@ directions_router = APIRouter(
 )
 
 
-@directions_router.get(path="/{direction_id}", response_model=Direction)
+@directions_router.get(path="/{direction_id}/", response_model=Direction)
 async def get_by_direction_id(
         direction_id: int,
         direction_use_case: Annotated[
@@ -29,19 +29,4 @@ async def get_by_direction_id(
     return JSONResponse(
         status_code=status.HTTP_200_OK,
         content=direction.model_dump()
-    )
-
-
-@directions_router.get(path="/points/{direction_id}", response_model=PointsHistory)
-async def get_points_history_by_direction_id(
-        direction_id: int,
-        points_use_case: Annotated[
-            PointsUseCase,
-            Depends(get_points_use_case)
-        ]
-) -> JSONResponse:
-    points_history = await points_use_case.get_by_direction_id(direction_id)
-    return JSONResponse(
-        status_code=status.HTTP_200_OK,
-        content=points_history.model_dump()
     )
