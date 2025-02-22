@@ -1,0 +1,8 @@
+fastapi~=0.115.8
+chromadb~=0.6.3
+pandas~=2.2.3
+scikit-learn~=1.6.1
+dependency-injector~=4.45.0
+sqlalchemy~=2.0.38
+alembic~=1.14.1
+aiosqlite~=0.21.0
