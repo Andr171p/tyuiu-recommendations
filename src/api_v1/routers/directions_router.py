@@ -12,7 +12,7 @@ from src.api_v1.dependencies import (
 
 
 directions_router = APIRouter(
-    prefix='/directions',
+    prefix='/ap1/v1/directions',
     tags=['Directions'],
 )
 
