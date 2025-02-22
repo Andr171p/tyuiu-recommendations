@@ -1,11 +1,11 @@
-from src.dto import ApplicantVector
+from src.dto import ApplicantDTO
 from src.core.entities import Applicant
 
 
 class ApplicantMapper:
     @staticmethod
-    def to_applicant_vector(applicant: Applicant) -> ApplicantVector:
-        return ApplicantVector(
+    def to_dto(applicant: Applicant) -> ApplicantDTO:
+        return ApplicantDTO(
             gender=applicant.gender,
             foreign_citizenship=applicant.foreign_citizenship,
             military_service=applicant.military_service,

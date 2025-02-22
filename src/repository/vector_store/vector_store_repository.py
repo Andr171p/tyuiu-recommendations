@@ -2,7 +2,7 @@ from typing import Set
 
 import numpy as np
 
-from src.services.vector_store import BaseRetriever
+from src.vector_store import BaseRetriever
 from src.dto import DirectionMetadata
 
 

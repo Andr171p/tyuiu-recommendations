@@ -2,9 +2,9 @@ import asyncio
 import pandas as pd
 from pathlib import Path
 
-from src.services.database.models import DirectionModel, PointsModel
-from src.services.database.crud import DirectionCRUD
-from src.services.database.database_manager import DatabaseManager
+from src.database.models import DirectionModel, PointsModel
+from src.database.crud import DirectionCRUD
+from src.database.database_manager import DatabaseManager
 from src.config import settings
 
 

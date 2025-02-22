@@ -1,7 +1,7 @@
 __all__ = (
-    "ApplicantVector",
+    "ApplicantDTO",
     "DirectionMetadata"
 )
 
-from src.dto.applicant_vector import ApplicantVector
+from src.dto.applicant_dto import ApplicantDTO
 from src.dto.direction_metadata import DirectionMetadata

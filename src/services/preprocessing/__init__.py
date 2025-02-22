@@ -1,7 +1,5 @@
 __all__ = (
-    "BasePreprocessingService",
-    "SklearnPreprocessingService"
+    "PreprocessingService"
 )
 
-from src.services.preprocessing.base_preprocessing import BasePreprocessingService
-from src.services.preprocessing.sklearn_preprocessing import SklearnPreprocessingService
+from src.services.preprocessing.preprocessing_service import PreprocessingService
