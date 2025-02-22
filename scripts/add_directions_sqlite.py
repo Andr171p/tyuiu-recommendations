@@ -45,4 +45,4 @@ async def add_direction_to_db() -> None:
         await crud.create(direction_model)
     
     
-# asyncio.run(add_direction_to_db())
+asyncio.run(add_direction_to_db())

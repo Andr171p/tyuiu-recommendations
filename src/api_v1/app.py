@@ -8,13 +8,16 @@ from src.api_v1.routers import (
     directions_router
 )
 from src.api_v1.container import Container
+from src.api_v1.lifespan import lifespan
 
 
 logging.basicConfig(level=logging.INFO)
 
 container = Container()
 
-app = FastAPI()
+app = FastAPI(
+    lifespan=lifespan
+)
 
 app.container = container
 
