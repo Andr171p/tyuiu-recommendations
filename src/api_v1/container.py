@@ -1,22 +1,26 @@
-from dependency_injector import containers, providers
 import chromadb
+from dependency_injector import containers, providers
 
-from src.interations import RecommendationsInteration
+from src.config import settings
 from src.core.use_cases import RecommendationsUseCase
-from src.services.vector_store import ChromaRetrieverService
-from src.services.preprocessing import SklearnPreprocessingService
-from src.services.preprocessing.sklearn_transformers import (
-    ZeroImputer,
+from src.vector_store.chroma import ChromaRetriever
+from src.database.crud import DirectionCRUD, PointsCRUD
+from src.database.database_manager import DatabaseManager
+from src.preprocessing import SklearnPipeline
+from src.preprocessing.sklearn_transformers import (
+    ZerosImputer,
     GenderBinarizer,
     MilitaryServiceBinarizer,
     ForeignCitizenshipEncoder,
     ApplicantsScaler
 )
-from src.config import settings
+from src.repository.database import DirectionRepository, PointsRepository
+from src.repository.vector_store import VectorStoreRepository
+from src.services.preprocessing import PreprocessingService
 
 
 class Container(containers.DeclarativeContainer):
-    zero_imputer = ZeroImputer()
+    zeros_imputer = ZerosImputer()
     gender_binarizer = providers.Singleton(
         GenderBinarizer,
         path=settings.transformers.gender_binarizer_path
@@ -33,9 +37,9 @@ class Container(containers.DeclarativeContainer):
         ApplicantsScaler,
         path=settings.transformers.applicants_scaler_path
     )
-    preprocessing_service = providers.Singleton(
-        SklearnPreprocessingService,
-        zero_imputer=ZeroImputer(),
+    sklearn_pipeline = providers.Singleton(
+        SklearnPipeline,
+        zeros_imputer=zeros_imputer,
         gender_binarizer=gender_binarizer,
         military_service_binarizer=military_service_binarizer,
         foreign_citizenship_encoder=foreign_citizenship_encoder,
@@ -45,17 +49,39 @@ class Container(containers.DeclarativeContainer):
         chromadb.PersistentClient,
         path=r"C:\Users\andre\IdeaProjects\TyuiuDirectionsRecSys\chroma"
     )
-    retriever_service = providers.Singleton(
-        ChromaRetrieverService,
+    chroma_retriever = providers.Singleton(
+        ChromaRetriever,
         client_api=client_api,
         collection_name="applicants"
     )
-    recommendations_use_case = providers.Singleton(
+    vector_store_repository = providers.Singleton(
+        VectorStoreRepository,
+        retriever=chroma_retriever
+    )
+    database_manager = DatabaseManager()
+    database_manager.init(settings.sqlite.url)
+    directions_crud = providers.Singleton(
+        DirectionCRUD,
+        manager=database_manager
+    )
+    points_crud = providers.Singleton(
+        PointsCRUD,
+        manager=database_manager
+    )
+    directions_repository = providers.Singleton(
+        DirectionRepository,
+        crud=directions_crud
+    )
+    points_repository = providers.Singleton(
+        PointsRepository,
+        crud=points_crud
+    )
+    preprocessing_service = providers.Singleton(
+        PreprocessingService,
+        pipeline=sklearn_pipeline
+    )
+    recommendations_use_case = providers.Factory(
         RecommendationsUseCase,
         preprocessing_service=preprocessing_service,
-        retriever_service=retriever_service
-    )
-    recommendations_interaction = providers.Factory(
-        RecommendationsInteration,
-        recommendations_use_case=recommendations_use_case
+        vector_store_repository=vector_store_repository
     )

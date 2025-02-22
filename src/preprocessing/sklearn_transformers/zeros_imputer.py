@@ -6,7 +6,7 @@ if TYPE_CHECKING:
 from sklearn.base import BaseEstimator, TransformerMixin
 
 
-class ZeroImputer(BaseEstimator, TransformerMixin):
+class ZerosImputer(BaseEstimator, TransformerMixin):
     def __init__(self, columns: Optional[List[str]] = None) -> None:
         self.columns = columns
 
