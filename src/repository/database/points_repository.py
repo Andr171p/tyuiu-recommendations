@@ -1,8 +1,8 @@
 from typing import List
 
 from src.repository.database.database_repository import DatabaseRepository
-from src.services.database.models import PointsModel
-from src.services.database.crud import PointsCRUD
+from src.database.models import PointsModel
+from src.database.crud import PointsCRUD
 from src.core.entities import Points
 
 

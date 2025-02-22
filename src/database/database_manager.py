@@ -11,11 +11,7 @@ from sqlalchemy.ext.asyncio import (
 
 
 class DatabaseManager:
-    def __init__(self) -> None:
-        self._engine: Optional[AsyncEngine] = None
-        self._sessionmaker: Optional[async_sessionmaker[AsyncSession]] = None
-
-    def init(self, url: str) -> None:
+    def __init__(self, url: str) -> None:
         self._engine = create_async_engine(
             url=url,
             echo=True

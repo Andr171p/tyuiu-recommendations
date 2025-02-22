@@ -58,8 +58,10 @@ class Container(containers.DeclarativeContainer):
         VectorStoreRepository,
         retriever=chroma_retriever
     )
-    database_manager = DatabaseManager()
-    database_manager.init(settings.sqlite.url)
+    database_manager = providers.Singleton(
+        DatabaseManager,
+        url=settings.sqlite.url,
+    )
     directions_crud = providers.Singleton(
         DirectionCRUD,
         manager=database_manager

@@ -1,7 +1,7 @@
 from numpy import ndarray
 from chromadb import ClientAPI
 
-from src.services.vector_store.base_retriever import BaseRetriever
+from src.vector_store.base_retriever import BaseRetriever
 
 
 class ChromaRetriever(BaseRetriever):

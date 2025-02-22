@@ -4,6 +4,6 @@ __all__ = (
     "PointsCRUD"
 )
 
-from src.services.database.crud.base_crud import BaseCRUD
-from src.services.database.crud.direction_crud import DirectionCRUD
-from src.services.database.crud.points_crud import PointsCRUD
+from src.database.crud.base_crud import BaseCRUD
+from src.database.crud.direction_crud import DirectionCRUD
+from src.database.crud.points_crud import PointsCRUD

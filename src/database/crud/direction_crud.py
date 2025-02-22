@@ -1,10 +1,10 @@
 from typing import List
 
-from sqlalchemy import insert, select
+from sqlalchemy import select
 
-from src.services.database.crud.base_crud import BaseCRUD
-from src.services.database.models import DirectionModel
-from src.services.database.database_manager import DatabaseManager
+from src.database.crud.base_crud import BaseCRUD
+from src.database.models import DirectionModel
+from src.database.database_manager import DatabaseManager
 
 
 class DirectionCRUD(BaseCRUD):

@@ -2,9 +2,9 @@ from typing import List
 
 from sqlalchemy import insert, select
 
-from src.services.database.crud.base_crud import BaseCRUD
-from src.services.database.models import PointsModel
-from src.services.database.database_manager import DatabaseManager
+from src.database.crud.base_crud import BaseCRUD
+from src.database.models import PointsModel
+from src.database.database_manager import DatabaseManager
 
 
 class PointsCRUD(BaseCRUD):

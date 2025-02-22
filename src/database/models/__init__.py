@@ -4,6 +4,6 @@ __all__ = (
     "PointsModel"
 )
 
-from src.services.database.models.base_model import BaseModel
-from src.services.database.models.direction_model import DirectionModel
-from src.services.database.models.points_model import PointsModel
+from src.database.models.base_model import BaseModel
+from src.database.models.direction_model import DirectionModel
+from src.database.models.points_model import PointsModel

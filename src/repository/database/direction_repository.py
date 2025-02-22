@@ -1,8 +1,8 @@
 from typing import List
 
 from src.repository.database.database_repository import DatabaseRepository
-from src.services.database.crud import DirectionCRUD
-from src.services.database.models import DirectionModel
+from src.database.crud import DirectionCRUD
+from src.database.models import DirectionModel
 from src.core.entities import Direction
 
 
