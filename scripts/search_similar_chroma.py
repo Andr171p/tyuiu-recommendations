@@ -1,4 +1,3 @@
-import uuid
 import joblib
 import chromadb
 import pandas as pd

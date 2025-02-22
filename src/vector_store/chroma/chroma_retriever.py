@@ -18,7 +18,7 @@ class ChromaRetriever(BaseRetriever):
             top_n: int = 10
     ) -> dict:
         results = self._collection.query(
-            query_embeddings=[vector.tolist()],
+            query_embeddings=[vector[0].tolist()],
             n_results=top_n
         )
         return results
