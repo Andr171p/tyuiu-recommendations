@@ -3,7 +3,10 @@ import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from src.api_v1.routers import recommendations_router
+from src.api_v1.routers import (
+    recommendations_router,
+    directions_router
+)
 from src.api_v1.container import Container
 
 
@@ -16,6 +19,7 @@ app = FastAPI()
 app.container = container
 
 app.include_router(recommendations_router)
+app.include_router(directions_router)
 
 app.add_middleware(
     CORSMiddleware,

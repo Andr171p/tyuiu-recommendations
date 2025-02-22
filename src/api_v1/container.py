@@ -2,7 +2,11 @@ import chromadb
 from dependency_injector import containers, providers
 
 from src.config import settings
-from src.core.use_cases import RecommendationsUseCase
+from src.core.use_cases import (
+    RecommendationsUseCase,
+    DirectionUseCase,
+    PointsUseCase
+)
 from src.vector_store.chroma import ChromaRetriever
 from src.database.crud import DirectionCRUD, PointsCRUD
 from src.database.database_manager import DatabaseManager
@@ -86,4 +90,12 @@ class Container(containers.DeclarativeContainer):
         RecommendationsUseCase,
         preprocessing_service=preprocessing_service,
         vector_store_repository=vector_store_repository
+    )
+    direction_use_case = providers.Factory(
+        DirectionUseCase,
+        direction_repository=directions_repository
+    )
+    points_use_case = providers.Factory(
+        PointsUseCase,
+        points_repository=points_repository
     )
