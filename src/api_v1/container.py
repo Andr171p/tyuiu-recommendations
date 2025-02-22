@@ -51,7 +51,7 @@ class Container(containers.DeclarativeContainer):
     )
     client_api = providers.Singleton(
         chromadb.PersistentClient,
-        path=r"C:\Users\andre\IdeaProjects\TyuiuDirectionsRecSys\chroma"
+        path=settings.chroma.path
     )
     chroma_retriever = providers.Singleton(
         ChromaRetriever,
