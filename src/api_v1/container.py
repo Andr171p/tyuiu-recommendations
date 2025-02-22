@@ -19,7 +19,7 @@ from src.preprocessing.sklearn_transformers import (
     ApplicantsScaler
 )
 from src.repository.database import DirectionRepository, PointsRepository
-from src.repository.vector_store import VectorStoreRepository
+from src.repository.vector_store import PineconeRepository
 from src.services.preprocessing import PreprocessingService
 
 
@@ -58,8 +58,8 @@ class Container(containers.DeclarativeContainer):
         pinecone=pinecone,
         index_name="applicants"
     )
-    vector_store_repository = providers.Singleton(
-        VectorStoreRepository,
+    pinecone_repository = providers.Singleton(
+        PineconeRepository,
         retriever=pinecone_retriever
     )
     database_manager = providers.Singleton(
@@ -89,7 +89,7 @@ class Container(containers.DeclarativeContainer):
     recommendations_use_case = providers.Factory(
         RecommendationsUseCase,
         preprocessing_service=preprocessing_service,
-        vector_store_repository=vector_store_repository
+        vector_store_repository=pinecone_repository
     )
     direction_use_case = providers.Factory(
         DirectionUseCase,

@@ -20,6 +20,6 @@ class PineconeRetriever(BaseRetriever):
         results = self._index.query(
             vector=vector[0].tolist(),
             top_k=top_n,
-            include_values=True
+            include_metadata=True
         )
         return results
