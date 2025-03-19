@@ -1,4 +1,4 @@
-from src.repository.database import PointsRepository
+from src.repository import PointsRepository
 from src.core.entities import PointsHistory
 
 

@@ -1,14 +1,8 @@
-from typing import Annotated
+from fastapi import APIRouter, status
+from dishka.integrations.fastapi import FromDishka
 
-from fastapi import APIRouter, Depends, status
-from fastapi.responses import JSONResponse
-
-from src.core.entities import Direction, PointsHistory
-from src.core.use_cases import DirectionUseCase, PointsUseCase
-from src.api.dependencies import (
-    get_direction_use_case,
-    get_points_use_case
-)
+from src.core.entities import Direction
+from src.core.use_cases import DirectionUseCase
 
 
 directions_router = APIRouter(
@@ -17,16 +11,14 @@ directions_router = APIRouter(
 )
 
 
-@directions_router.get(path="/{direction_id}/", response_model=Direction)
+@directions_router.get(
+    path="/{direction_id}/",
+    response_model=Direction,
+    status_code=status.HTTP_200_OK
+)
 async def get_by_direction_id(
         direction_id: int,
-        direction_use_case: Annotated[
-            DirectionUseCase,
-            Depends(get_direction_use_case)
-        ]
-) -> JSONResponse:
+        direction_use_case: FromDishka[DirectionUseCase]
+) -> Direction:
     direction = await direction_use_case.get_by_direction_id(direction_id)
-    return JSONResponse(
-        status_code=status.HTTP_200_OK,
-        content=direction.model_dump()
-    )
+    return direction

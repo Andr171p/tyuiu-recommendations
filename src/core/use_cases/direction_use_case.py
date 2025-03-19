@@ -1,4 +1,4 @@
-from src.repository.database import DirectionRepository
+from src.repository import DirectionRepository
 from src.core.entities import Direction
 
 
