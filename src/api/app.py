@@ -13,8 +13,8 @@ from src.api.v1.routers import (
 def create_app() -> FastAPI:
     app = FastAPI()
     app.include_router(recommendations_router)
-    app.include_router(directions_router)
-    app.include_router(points_router)
+    # app.include_router(directions_router)
+    # app.include_router(points_router)
     app.add_middleware(
         CORSMiddleware,
         allow_origins=["*"],

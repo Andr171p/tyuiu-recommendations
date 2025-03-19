@@ -1,5 +1,5 @@
 from fastapi import APIRouter, status
-from dishka.integrations.fastapi import FromDishka
+from dishka.integrations.fastapi import FromDishka, DishkaRoute
 
 from src.core.entities import Applicant, Recommendations
 from src.core.use_cases import RecommendationsUseCase
@@ -7,7 +7,8 @@ from src.core.use_cases import RecommendationsUseCase
 
 recommendations_router = APIRouter(
     tags=["Recommendations"],
-    prefix="/api/v1/recommendations"
+    prefix="/api/v1/recommendations",
+    route_class=DishkaRoute
 )
 
 
