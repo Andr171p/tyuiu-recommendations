@@ -30,6 +30,6 @@ class RecommendationSystem:
         user_index = len(self._df)
         cosine_similarity_matrix = cosine_similarity(combined_df)
         similar_users_indices = cosine_similarity_matrix[user_index].argsort()[::-1][1:]
-        similar_users = combined_df.iloc[similar_users_indices]
-        recommendations = similar_users.iloc[similar_users_indices][["Направление подготовки", "ID"]]
+        # similar_users = combined_df.iloc[similar_users_indices]
+        recommendations = self._df.iloc[similar_users_indices][["Направление подготовки", "ID"]]
         return recommendations
