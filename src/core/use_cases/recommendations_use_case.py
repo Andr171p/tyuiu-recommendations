@@ -1,5 +1,5 @@
 from src.core.entities import Recommendations, Applicant
-from src.mappers import ApplicantMapper
+from src.mappers import ApplicantMapper, RecommendationsMapper
 from src.recommendation_system import RecommendationSystem
 
 
@@ -9,4 +9,5 @@ class RecommendationsUseCase:
 
     def recommend(self, applicant: Applicant) -> Recommendations:
         applicant_df = ApplicantMapper.to_df(applicant)
-        recommendations_ids = self._recommendations_system.recommend(applicant_df)
+        recommendations = self._recommendations_system.recommend(applicant_df)
+        return RecommendationsMapper.from_df(recommendations)

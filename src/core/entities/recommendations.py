@@ -2,8 +2,8 @@ from typing import List
 
 from pydantic import BaseModel
 
-from src.dto import DirectionMetadata
+from src.core.entities.recommended_direction import RecommendedDirection
 
 
 class Recommendations(BaseModel):
-    directions: List[DirectionMetadata]
+    directions: List[RecommendedDirection]

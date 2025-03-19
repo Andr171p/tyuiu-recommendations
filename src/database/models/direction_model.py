@@ -19,7 +19,12 @@ class DirectionModel(BaseModel):
     points: Mapped[list["PointsModel"]] = relationship(back_populates="direction")
 
     def __str__(self) -> str:
-        return f"{self.__class__.__name__}(direction_id={self.direction_id}, name={self.name}, description={self.description})"
+        return (
+            f"{self.__class__.__name__}"
+            f"(direction_id={self.direction_id}, "
+            f"name={self.name}, "
+            f"description={self.description})"
+        )
 
     def __repr__(self) -> str:
         return str(self)
