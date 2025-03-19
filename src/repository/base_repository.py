@@ -13,6 +13,6 @@ class BaseRepository(ABC):
         raise NotImplemented
 
     @abstractmethod
-    async def add(self, item: BaseModel) -> int:
+    async def add(self, model: "BaseModel") -> int:
         raise NotImplemented
     
