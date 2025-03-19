@@ -4,9 +4,7 @@ from dishka.integrations.fastapi import setup_dishka
 
 from src.di import container
 from src.api.v1.routers import (
-    recommendations_router,
-    directions_router,
-    points_router
+    recommendations_router
 )
 
 

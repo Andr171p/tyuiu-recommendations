@@ -1,5 +1,5 @@
 from fastapi import APIRouter, status
-from dishka.integrations.fastapi import FromDishka
+from dishka.integrations.fastapi import FromDishka, DishkaRoute
 
 from src.core.entities import Direction
 from src.core.use_cases import DirectionUseCase
@@ -8,6 +8,7 @@ from src.core.use_cases import DirectionUseCase
 directions_router = APIRouter(
     prefix='/ap1/v1/directions',
     tags=['Directions'],
+    route_class=DishkaRoute
 )
 
 

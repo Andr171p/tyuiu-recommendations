@@ -1,5 +1,5 @@
 from fastapi import APIRouter, status
-from dishka.integrations.fastapi import FromDishka
+from dishka.integrations.fastapi import FromDishka, DishkaRoute
 
 from src.core.use_cases import PointsUseCase
 from src.core.entities import PointsHistory
@@ -7,7 +7,8 @@ from src.core.entities import PointsHistory
 
 points_router = APIRouter(
     prefix="/api/v1/points",
-    tags=["Points"]
+    tags=["Points"],
+    route_class=DishkaRoute
 )
 
 
