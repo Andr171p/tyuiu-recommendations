@@ -1,19 +1,21 @@
 from typing import List, Literal, Dict
 
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 
 from src.core.entities.exam import Exam
 
 
 class Applicant(BaseModel):
-    gender: Literal["male", "female"]
-    foreign_citizenship: str
-    military_service: Literal["yes", "no"]
+    gender: Literal["М", "Ж"]
     gpa: float
     points: int
-    bonus_points: int
     exams: List[Exam]
+
+    @field_validator("gender")
+    def validate_gender(cls, gender: Literal["М", "Ж"]) -> Literal[0, 1]:
+        return 1 if gender == "М" else 0
 
     @property
     def exams_dict(self) -> Dict[str, int]:
         return {exam.subject: exam.points for exam in self.exams}
+

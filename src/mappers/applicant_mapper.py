@@ -1,22 +1,21 @@
-from src.dto import ApplicantDTO
+import pandas as pd
+
 from src.core.entities import Applicant
 
 
 class ApplicantMapper:
     @staticmethod
-    def to_dto(applicant: Applicant) -> ApplicantDTO:
-        return ApplicantDTO(
-            gender=applicant.gender,
-            foreign_citizenship=applicant.foreign_citizenship,
-            military_service=applicant.military_service,
-            gpa=applicant.gpa,
-            points=applicant.points,
-            bonus_points=applicant.bonus_points,
-            russian=applicant.exams_dict.get("russian"),
-            social_science=applicant.exams_dict.get("social_science"),
-            math=applicant.exams_dict.get("math"),
-            physics=applicant.exams_dict.get("physics"),
-            chemistry=applicant.exams_dict.get("chemistry"),
-            history=applicant.exams_dict.get("history"),
-            informatics=applicant.exams_dict.get("informatics")
-        )
+    def to_df(applicant: Applicant) -> pd.DataFrame:
+        applicant_dict = {
+            "Пол": applicant.gender,
+            "Ср. балл док-та об образовании": applicant.gpa,
+            "Сумма баллов": applicant.points,
+            "Обществознание": applicant.exams_dict.get("social_science", 0),
+            "Математика": applicant.exams_dict.get("math", 0),
+            "Информатика": applicant.exams_dict.get("informatics", 0),
+            "Русский язык": applicant.exams_dict.get("russian", 0),
+            "Физика": applicant.exams_dict.get("physics", 0),
+            "Химия": applicant.exams_dict.get("chemistry", 0),
+            "История": applicant.exams_dict.get("history", 0)
+        }
+        return pd.DataFrame(applicant_dict, index=[0])

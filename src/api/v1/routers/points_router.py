@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, status
 from fastapi.responses import JSONResponse
 
-from src.api_v1.dependencies import get_points_use_case
+from src.api.dependencies import get_points_use_case
 from src.core.use_cases import PointsUseCase
 from src.core.entities import PointsHistory
 

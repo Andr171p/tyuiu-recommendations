@@ -5,7 +5,7 @@ from fastapi.responses import JSONResponse
 
 from src.core.entities import Direction, PointsHistory
 from src.core.use_cases import DirectionUseCase, PointsUseCase
-from src.api_v1.dependencies import (
+from src.api.dependencies import (
     get_direction_use_case,
     get_points_use_case
 )
