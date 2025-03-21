@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 
-class Points(BaseModel):
+class PassingPoints(BaseModel):
     year: int
     points: int
     

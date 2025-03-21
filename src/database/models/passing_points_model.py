@@ -4,10 +4,10 @@ from src.database.models.base_model import BaseModel
 from src.database.models.direction_relation_mixin import DirectionRelationMixin
 
 
-class PointsModel(DirectionRelationMixin, BaseModel):
-    __tablename__ = "points"
+class PassingPointsModel(DirectionRelationMixin, BaseModel):
+    __tablename__ = "passing_points"
 
-    _direction_back_populates = "points"
+    _direction_back_populates = "passing_points"
 
     year: Mapped[int] = mapped_column(nullable=False)
     points: Mapped[int] = mapped_column(nullable=False)

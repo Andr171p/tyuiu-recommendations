@@ -2,7 +2,7 @@ from typing import TypeVar
 
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.ext.asyncio import AsyncAttrs
-from sqlalchemy.orm import Mapped, mapped_column, declared_attr
+from sqlalchemy.orm import Mapped, mapped_column
 
 
 class BaseModel(AsyncAttrs, DeclarativeBase):
