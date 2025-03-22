@@ -1,6 +1,6 @@
-from typing import Sequence, Union
+from typing import Sequence
 
-from sqlalchemy import select
+from sqlalchemy import select, asc
 
 from src.database.crud.base_crud import BaseCRUD
 from src.database.models import EntranceExamModel
@@ -23,6 +23,7 @@ class EntranceExamCRUD(BaseCRUD):
             stmt = (
                 select(EntranceExamModel)
                 .where(EntranceExamModel.direction_id == direction_id)
+                .order_by(asc(EntranceExamModel.priority))
             )
             entrance_exam = await session.execute(stmt)
         return entrance_exam.scalars().all()

@@ -10,7 +10,7 @@ class DirectionRepository(BaseRepository):
     def __init__(self, crud: DirectionCRUD) -> None:
         self._crud = crud
 
-    async def add(self, direction: Direction) -> int:
+    async def save(self, direction: Direction) -> int:
         id = await self._crud.create(DirectionModel(**direction.model_dump()))
         return id
         

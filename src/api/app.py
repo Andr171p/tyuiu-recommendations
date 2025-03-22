@@ -4,15 +4,15 @@ from dishka.integrations.fastapi import setup_dishka
 
 from src.di import container
 from src.api.v1.routers import (
-    recommendations_router
+    recommendations_router,
+    directions_router
 )
 
 
 def create_app() -> FastAPI:
     app = FastAPI()
     app.include_router(recommendations_router)
-    # app.include_router(directions_router)
-    # app.include_router(points_router)
+    app.include_router(directions_router)
     app.add_middleware(
         CORSMiddleware,
         allow_origins=["*"],

@@ -7,12 +7,15 @@ from abc import ABC, abstractmethod
 
 
 class BaseRepository(ABC):
-
     @abstractmethod
-    async def get_all(self) -> Union["BaseModel", None]:
+    async def save(self, model: "BaseModel") -> int:
         raise NotImplemented
 
     @abstractmethod
-    async def add(self, model: "BaseModel") -> int:
+    async def get_by_direction_id(self, direction_id: int) -> "BaseModel":
+        raise NotImplemented
+
+    @abstractmethod
+    async def get_all(self) -> Union["BaseModel", None]:
         raise NotImplemented
     

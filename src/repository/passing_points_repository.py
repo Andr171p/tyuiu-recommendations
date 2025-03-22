@@ -6,11 +6,11 @@ from src.database.crud import PassingPointsCRUD
 from src.core.entities import PassingPoints
 
 
-class PointsRepository(BaseRepository):
+class PassingPointsRepository(BaseRepository):
     def __init__(self, crud: PassingPointsCRUD) -> None:
         self._crud = crud
 
-    async def add(self, points: PassingPoints) -> int:
+    async def save(self, points: PassingPoints) -> int:
         id = await self._crud.create(PassingPointsModel(**points.model_dump()))
         return id
         

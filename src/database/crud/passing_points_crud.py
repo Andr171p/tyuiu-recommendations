@@ -1,6 +1,6 @@
 from typing import Sequence
 
-from sqlalchemy import select
+from sqlalchemy import select, asc
 
 from src.database.crud.base_crud import BaseCRUD
 from src.database.models import PassingPointsModel
@@ -23,6 +23,7 @@ class PassingPointsCRUD(BaseCRUD):
             stmt = (
                 select(PassingPointsModel)
                 .where(PassingPointsModel.direction_id == direction_id)
+                .order_by(asc(PassingPointsModel.year))
             )
             passing_points = await session.execute(stmt)
         return passing_points.scalars().all()
