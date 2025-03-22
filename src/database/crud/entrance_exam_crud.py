@@ -18,14 +18,14 @@ class EntranceExamCRUD(BaseCRUD):
             await session.commit()
         return id
 
-    async def read_by_direction_id(self, direction_id: int) -> Union[EntranceExamModel, None]:
+    async def read_by_direction_id(self, direction_id: int) -> Sequence[EntranceExamModel]:
         async with self._manager.session() as session:
             stmt = (
                 select(EntranceExamModel)
                 .where(EntranceExamModel.direction_id == direction_id)
             )
             entrance_exam = await session.execute(stmt)
-        return entrance_exam.scalar_one_or_none()
+        return entrance_exam.scalars().all()
 
     async def read_all(self) -> Sequence[EntranceExamModel]:
         async with self._manager.session() as session:
