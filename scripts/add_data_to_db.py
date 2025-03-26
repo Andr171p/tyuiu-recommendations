@@ -5,6 +5,7 @@ from pprint import pprint
 from src.database.models import DirectionModel, EntranceExamModel
 from src.database.crud import DirectionCRUD
 from src.database.database_manager import DatabaseManager
+from src.database.helpers import truncate_and_reset_id
 from src.config import BASE_DIR, settings
 
 JSON_PATH = BASE_DIR / "datasets" / "Структурированные_направления_подготовки_с_id.json"
@@ -19,6 +20,8 @@ with open(
 
 async def main() -> None:
     crud = DirectionCRUD(DatabaseManager(settings.postgres.url))
+    # await truncate_and_reset_id(DatabaseManager(settings.postgres.url), DirectionModel())
+    # await truncate_and_reset_id(DatabaseManager(settings.postgres.url), EntranceExamModel())
     for direction_json in directions_json:
         exams = []
         for exam in direction_json["Вступительные испытания"]:
