@@ -16,7 +16,7 @@ class DirectionOrm(Base):
     passing_points: Mapped[list["PassingPointsOrm"]] = relationship(back_populates="direction")
 
     __table_args__ = (
-        Index("direction_index", "direction_id")
+        Index("direction_index", "direction_id"),
     )
 
 
