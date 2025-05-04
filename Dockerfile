@@ -1,6 +1,6 @@
 FROM python:3.11
 
-WORKDIR /recommendations_system
+WORKDIR /tyuiu_recommendations
 
 COPY requirements.txt .
 
