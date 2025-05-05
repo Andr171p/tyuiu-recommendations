@@ -15,8 +15,8 @@ CSV_PATH = BASE_DIR / "datasets" / "csv" / "tyuiu_students_with_ids_2019-2024.cs
 
 
 class PostgresSettings(BaseSettings):
-    pg_host: str = "localhost"
-    pg_port: int = 5432
+    pg_host: str = os.getenv("POSTGRES_HOST")
+    pg_port: int = os.getenv("POSTGRES_PORT")
     pg_user: str = os.getenv("POSTGRES_USER")
     pg_password: str = os.getenv("POSTGRES_PASSWORD")
     pg_db: str = os.getenv("POSTGRES_DB")
