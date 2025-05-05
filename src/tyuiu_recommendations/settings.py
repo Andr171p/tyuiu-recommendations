@@ -15,7 +15,7 @@ CSV_PATH = BASE_DIR / "datasets" / "csv" / "tyuiu_students_with_ids_2019-2024.cs
 
 
 class PostgresSettings(BaseSettings):
-    pg_host: str = "host.docker.internal"
+    pg_host: str = "localhost"
     pg_port: int = 5432
     pg_user: str = os.getenv("POSTGRES_USER")
     pg_password: str = os.getenv("POSTGRES_PASSWORD")
@@ -26,6 +26,3 @@ class PostgresSettings(BaseSettings):
     @property
     def sqlalchemy_url(self) -> str:
         return f"postgresql+{self.pg_driver}://{self.pg_user}:{self.pg_password}@{self.pg_host}:{self.pg_port}/{self.pg_db}"
-
-
-print(PostgresSettings().sqlalchemy_url)

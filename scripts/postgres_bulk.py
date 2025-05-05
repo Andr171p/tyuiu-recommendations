@@ -73,4 +73,5 @@ async def main() -> None:
                 print(_ex)
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
