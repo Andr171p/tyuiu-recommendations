@@ -6,6 +6,10 @@ COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
+RUN alembic revision --autogenerate -m "Initial revision"
+
+RUN alembic upgrade head
+
 COPY . .
 
 EXPOSE 8800
