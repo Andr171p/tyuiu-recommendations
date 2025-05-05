@@ -17,7 +17,7 @@ recommendations_router = APIRouter(
 
 
 @recommendations_router.post(
-    path="/{top_n}",
+    path="/",
     status_code=status.HTTP_200_OK,
     response_model=RecommendationsResponse
 )
