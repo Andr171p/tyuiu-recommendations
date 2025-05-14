@@ -1,33 +1,28 @@
 services:
-  fastapi_recommendations:
-    build: .
-    container_name: fastapi_recommendations
-    ports:
-      - "8800:8000"
-    environment:
-      - DATABASE_URL=postgresql://app_user:password@postgres:5432/app_db
-    depends_on:
-      postgres:
-        condition: service_healthy
-    restart: unless-stopped
-
   postgres:
-    image: postgres:15
-    container_name: postgres
-    environment:
-      POSTGRES_PASSWORD: password
-      POSTGRES_USER: app_user
-      POSTGRES_DB: app_db
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    ports:
-      - "8888:5432"
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U app_user -d app_db"]
-      interval: 5s
-      timeout: 5s
-      retries: 10
+    image: postgres:13-alpine
     restart: unless-stopped
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=tyuiu_recommendations
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "8433:5432"
+
+  tyuiu_recommendations:
+    build: .
+    restart: unless-stopped
+    volumes:
+      - .:/tyuiu_recommendations
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/tyuiu_recommendations
+    ports:
+      - "8002:8000"
+    depends_on:
+      - postgres
+
 
 volumes:
-  pgdata:
+  postgres_data:

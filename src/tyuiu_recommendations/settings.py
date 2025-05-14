@@ -1,28 +1,21 @@
 import os
-from pathlib import Path
-from typing import Literal
 from dotenv import load_dotenv
+
 from pydantic_settings import BaseSettings
 
+from .constants import ENV_PATH, PG_DRIVER
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
-
-ENV_PATH = BASE_DIR / ".env"
 
 load_dotenv(ENV_PATH)
 
-CSV_PATH = BASE_DIR / "datasets" / "csv" / "tyuiu_students_with_ids_2019-2024.csv"
-
 
 class PostgresSettings(BaseSettings):
-    pg_host: str = os.getenv("POSTGRES_HOST")
-    pg_port: int = os.getenv("POSTGRES_PORT")
-    pg_user: str = os.getenv("POSTGRES_USER")
-    pg_password: str = os.getenv("POSTGRES_PASSWORD")
-    pg_db: str = os.getenv("POSTGRES_DB")
-
-    pg_driver: Literal["asyncpg"] = "asyncpg"
+    PG_HOST: str = os.getenv("POSTGRES_HOST")
+    PG_PORT: int = os.getenv("POSTGRES_PORT")
+    PG_USER: str = os.getenv("POSTGRES_USER")
+    PG_PASSWORD: str = os.getenv("POSTGRES_PASSWORD")
+    PG_DB: str = os.getenv("POSTGRES_DB")
 
     @property
     def sqlalchemy_url(self) -> str:
-        return f"postgresql+{self.pg_driver}://{self.pg_user}:{self.pg_password}@{self.pg_host}:{self.pg_port}/{self.pg_db}"
+        return f"postgresql+{PG_DRIVER}://{self.PG_USER}:{self.PG_PASSWORD}@{self.PG_HOST}:{self.PG_PORT}/{self.PG_DB}"

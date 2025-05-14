@@ -1,4 +1,5 @@
-from .settings import PostgresSettings, CSV_PATH
+from .settings import PostgresSettings
+from .constants import CSV_PATH
 from .recommendation_system import RecommendationSystem
 
 from .database.session import create_sessionmaker
