@@ -1,5 +1,7 @@
 from typing import Annotated
 
+from concurrent.futures import ThreadPoolExecutor
+
 from fastapi import APIRouter, status, Query
 
 from dishka.integrations.fastapi import FromDishka, DishkaRoute
@@ -28,5 +30,7 @@ async def get_recommendations(
         applicant: Applicant,
         recommendation_system: FromDishka[RecommendationSystem]
 ) -> RecommendationsResponse:
-    recommendations = recommendation_system.recommend(applicant, top_n)
+    with ThreadPoolExecutor() as executor:
+        recommendations = await executor.submit(recommendation_system.recommend, applicant, top_n)
+    # recommendations = recommendation_system.recommend(applicant, top_n)
     return RecommendationsResponse(recommendations=recommendations)
