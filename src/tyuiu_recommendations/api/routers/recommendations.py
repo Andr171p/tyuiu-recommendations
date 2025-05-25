@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from concurrent.futures import ThreadPoolExecutor
+import asyncio
 
 from fastapi import APIRouter, status, Query
 
@@ -30,7 +30,6 @@ async def get_recommendations(
         applicant: Applicant,
         recommendation_system: FromDishka[RecommendationSystem]
 ) -> RecommendationsResponse:
-    with ThreadPoolExecutor() as executor:
-        recommendations = await executor.submit(recommendation_system.recommend, applicant, top_n)
+    recommendations = await asyncio.to_thread(recommendation_system.recommend, applicant, top_n)
     # recommendations = recommendation_system.recommend(applicant, top_n)
     return RecommendationsResponse(recommendations=recommendations)
