@@ -10,8 +10,10 @@ load_dotenv(ENV_PATH)
 
 
 class PostgresSettings(BaseSettings):
-    PG_HOST: str = os.getenv("POSTGRES_HOST")
-    PG_PORT: int = os.getenv("POSTGRES_PORT")
+    # PG_HOST: str = os.getenv("POSTGRES_HOST")
+    PG_HOST: str = "192.168.16.222"
+    # PG_PORT: int = os.getenv("POSTGRES_PORT")
+    PG_PORT: int = 8433
     PG_USER: str = os.getenv("POSTGRES_USER")
     PG_PASSWORD: str = os.getenv("POSTGRES_PASSWORD")
     PG_DB: str = os.getenv("POSTGRES_DB")

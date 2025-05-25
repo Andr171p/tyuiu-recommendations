@@ -1,4 +1,4 @@
-from typing import List, Literal
+from typing import Literal
 
 import pandas as pd
 
@@ -9,37 +9,22 @@ from .constants import (
     MAX_GPA,
     MIN_POINTS,
     MAX_POINTS,
+    INPUT_EXAMS,
+    SUBJECTS_MAP,
+    FEATURES_EXAMS,
     MIN_EXAM_POINTS,
     MAX_EXAM_POINTS,
-    SUBJECTS_MAP
+    AVAILABLE_EDUCATION_FORMS,
+    DIRECTIONS_MAPPING,
 )
 
 
 class Exam(BaseModel):
-    subject: Literal[
-        "Русский язык",
-        "Обществознание",
-        "Математика",
-        "Физика",
-        "Химия",
-        "История",
-        "Информатика"
-    ]
+    subject: INPUT_EXAMS
     points: int = Field(ge=MIN_EXAM_POINTS, le=MAX_EXAM_POINTS)
 
     @field_validator("subject")
-    def validate_subject(
-            cls,
-            subject: str
-    ) -> Literal[
-        "russian",
-        "social_science",
-        "math",
-        "physics",
-        "chemistry",
-        "history",
-        "informatics"
-    ]:
+    def validate_subject(cls, subject: str) -> FEATURES_EXAMS:
         return SUBJECTS_MAP[subject]
 
 
@@ -47,10 +32,10 @@ class Applicant(BaseModel):
     gender: Literal["male", "female"]
     gpa: float = Field(ge=MIN_GPA, le=MAX_GPA)
     points: int = Field(ge=MIN_POINTS, le=MAX_POINTS)
-    exams: List[Exam]
+    exams: list[Exam]
 
     @field_validator("gender")
-    def validate_gender(cls, gender: Literal["male", "female"]) -> Literal[0, 1]:
+    def encode_gender(cls, gender: Literal["male", "female"]) -> Literal[0, 1]:
         return 1 if gender == "male" else 0
 
     @property
@@ -75,28 +60,37 @@ class Applicant(BaseModel):
 
 class Direction(BaseModel):
     direction_id: int
-    education_form: Literal["ОФО", "ЗФО"]
     name: str
+    education_form: AVAILABLE_EDUCATION_FORMS
     description: str
 
     model_config = ConfigDict(from_attributes=True)
 
+    @field_validator("name")
+    def mapping_direction_name(cls, name: str) -> str:
+        return DIRECTIONS_MAPPING[name]
 
-class RecommendedDirection(BaseModel):
+
+class Recommendation(BaseModel):
     direction_id: int
     name: str
 
 
 class EntranceExam(BaseModel):
-    priority: int
     name: str
+    priority: int
     min_points: int
 
     model_config = ConfigDict(from_attributes=True)
 
 
-class PassingPoints(BaseModel):
+class PassingPoint(BaseModel):
     year: int
     points: int
 
     model_config = ConfigDict(from_attributes=True)
+
+
+class ReadableDirection(Direction):
+    entrance_exams: list[EntranceExam]
+    passing_points: list[PassingPoint]

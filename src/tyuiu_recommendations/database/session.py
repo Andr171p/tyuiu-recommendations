@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import (
     create_async_engine
 )
 
-from ..settings import PostgresSettings
+from src.tyuiu_recommendations.settings import PostgresSettings
 
 
 def create_sessionmaker(pg_settings: PostgresSettings) -> async_sessionmaker[AsyncSession]:
@@ -15,3 +15,20 @@ def create_sessionmaker(pg_settings: PostgresSettings) -> async_sessionmaker[Asy
         autoflush=False,
         expire_on_commit=False
     )
+
+
+sessionmaker = create_sessionmaker(PostgresSettings())
+
+from src.tyuiu_recommendations.database.repositories import DirectionRepository
+
+repository = DirectionRepository(sessionmaker)
+
+import asyncio
+
+
+async def main() -> None:
+    direction = await repository.read(8)
+    print(direction)
+
+
+asyncio.run(main())

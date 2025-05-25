@@ -12,7 +12,7 @@ from src.tyuiu_recommendations.database.models import (
     Base,
     DirectionOrm,
     EntranceExamOrm,
-    PassingPointsOrm
+    PassingPointOrm
 )
 
 # this is the Alembic Config object, which provides
