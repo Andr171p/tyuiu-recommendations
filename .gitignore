@@ -50,6 +50,7 @@ unit.xml
 # IDE и редакторы
 .vscode/
 .idea/
+.idea
 .gigaide
 *.swp
 *.swo
